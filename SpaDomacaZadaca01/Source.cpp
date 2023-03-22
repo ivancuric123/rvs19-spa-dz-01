@@ -1,22 +1,32 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include "Cvijet.h"
+using namespace std;
+using namespace sf;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Hello, SFML world!");
+	const int windowWidth = 800;
+	const int windowHeight = 600;
+	const std::string windowTitle = "Cvijet";
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), windowTitle);
 	window.setFramerateLimit(60);
-	//Cvijet cvijet(&window);
+
+	Cvijet cvijet(window);
+	sf::Clock clock;
 
 	while (window.isOpen())
 	{
-		sf::Event event;
+		Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (event.type == Event::Closed)
 				window.close();
 		}
 
 		window.clear();
-		//cvijet.draw();
+		cvijet.Animate(clock);
+		cvijet.Draw(window);
 		window.display();
 	}
 
